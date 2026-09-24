@@ -31,3 +31,10 @@ export async function closeSession(sessionId: number, notes?: string): Promise<v
 export async function getSessionEvents(sessionId: number): Promise<SessionEvent[]> {
   return db.events.where('sessionId').equals(sessionId).sortBy('timestamp')
 }
+
+export async function deleteSession(sessionId: number): Promise<void> {
+  await db.transaction('rw', db.sessions, db.events, async () => {
+    await db.events.where('sessionId').equals(sessionId).delete()
+    await db.sessions.delete(sessionId)
+  })
+}

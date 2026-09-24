@@ -33,7 +33,7 @@ export default function App() {
         <div className="status-line"><ShieldCheck size={15} /> Private on this device <span>•</span> No account needed</div>
       </div>
       <footer className="bottom-controls"><TimerControls status={timer.status} onStart={() => void timer.start()} onReset={() => void timer.resetInterval()} onCheckIn={() => void timer.checkIn()} onResume={() => void timer.resumeInterval()} onAsleep={() => void timer.fellAsleep()} onEnd={() => void timer.end()} /></footer>
-      <SessionDrawer open={drawerOpen} activeSessionId={timer.sessionId} onClose={() => setDrawerOpen(false)} />
+      <SessionDrawer open={drawerOpen} activeSessionId={['running', 'complete', 'check_in', 'asleep'].includes(timer.status) ? timer.sessionId : null} onClose={() => setDrawerOpen(false)} />
       {settingsOpen && <ScheduleEditor schedule={scheduleMap} onSave={saveSchedules} onClose={() => setSettingsOpen(false)} />}
       {tutorialOpen && <TutorialModal onDone={finishTutorial} />}
     </main>

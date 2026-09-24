@@ -9,6 +9,15 @@ npm install
 npm run dev
 ```
 
+Open the local URL printed by Vite, usually `http://localhost:5173/`. To test the session logs locally:
+
+1. Start a bedtime session and end it so it becomes a historical session.
+2. Open **Logs**, expand the session, and verify its events are shown.
+3. Click the delete icon, cancel the confirmation once, then confirm deletion.
+4. Reopen **Logs** and verify the session is gone. An active session's delete action should be disabled.
+
+The development server injects CSS inline. If the page appears as unstyled browser-default HTML, the development CSP may need `style-src 'self' 'unsafe-inline'` in `index.html`; restart the dev server and hard-refresh afterward. Do not carry `'unsafe-inline'` into production. Use a production CSP with `style-src 'self'` (or a nonce/hash for any required inline styles), preferably configured as a response header or environment-specific deployment setting.
+
 Validate the project with:
 
 ```bash
